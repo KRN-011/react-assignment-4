@@ -5,6 +5,7 @@ import { TbBrandAppgallery } from "react-icons/tb";
 import { TiStarFullOutline } from "react-icons/ti";
 import { IoMdPricetag } from "react-icons/io";
 import { BiSolidDollarCircle } from "react-icons/bi";
+import Loader from "../utils/Loader";
 
 interface Product {
   id: number;
@@ -56,7 +57,7 @@ const Products = () => {
   return (
     <>
       {
-        isLoading ? <div className="flex justify-center items-center text-2xl font-semibold h-[20vh]">Loading...</div> :
+        isLoading ? <Loader/> :
           <div className="max-w-7xl mx-auto p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
               {products.map((product) => (

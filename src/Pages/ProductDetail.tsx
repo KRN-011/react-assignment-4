@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import ProductImageModal from '../Components/ProductImageModal';
 import { IoIosCloseCircle } from "react-icons/io";
+import Loader from '../utils/Loader';
 
 interface Product {
     id: number;
@@ -89,7 +90,7 @@ const ProductDetail: React.FC = () => {
     }, [id])
 
     if (isLoading) {
-        return <p className="text-center text-gray-600">Loading...</p>;
+        return <Loader/>;
     }
 
     if (!product) {
@@ -279,7 +280,7 @@ const ProductDetail: React.FC = () => {
             {
                 isImageModalOpen &&
                 <div className='fixed top-0 right-0 m-7'>
-                    <IoIosCloseCircle onClick={imageModelCloseOnClick} color='#fff' size={"3em"} className='cursor-pointer' />
+                    <IoIosCloseCircle onClick={imageModelCloseOnClick} color='#fff' size={"3em"} className='cursor-pointer duration-150 ease-[cubic-bezier(.21,1.17,.74,1.11)] hover:scale-110' />
                 </div>
             }
         </>
