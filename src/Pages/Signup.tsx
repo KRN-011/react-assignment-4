@@ -3,6 +3,7 @@ import React from 'react'
 import { signUpValidationSchema } from '../utils/signUpValidationSchema'
 import CryptoJS from 'crypto-js'
 import { useNavigate } from 'react-router-dom'
+import styles from '../styles/signup.module.scss'
 
 interface User {
     firstName: string,
@@ -75,95 +76,89 @@ const Signup: React.FC = () => {
 
     return (
         <>
-            <div className="flex items-center h-[100vh]">
-                <div className="w-full sm:w-[80vw] md:w-[60vw] lg:w-[40vw] xl:w-[30vw] flex flex-col mx-auto justify-center p-6 bg-white rounded-lg shadow-lg">
-                    <h2 className="flex justify-center text-3xl font-bold mb-10">Sign Up</h2>
-                    <Formik initialValues={initialFormValues} validationSchema={signUpValidationSchema} onSubmit={submitHandler}>
+            <div className={styles.signupContainer}>
+                <div className={styles.formContainer}>
+                    <h2>Sign Up</h2>
+                    <Formik
+                        initialValues={initialFormValues}
+                        validationSchema={signUpValidationSchema}
+                        onSubmit={submitHandler}
+                    >
                         {() => (
-                            <Form className="space-y-6">
-                                <div className="flex flex-col">
-                                    <label htmlFor="firstName" className="mb-2 font-medium">First Name</label>
-                                    <Field
-                                        type="text"
-                                        id="firstName"
+                            <Form className={styles.form}>
+                                <div className={styles.formGroup}>
+                                    <label htmlFor="firstName">First Name</label>
+                                    <Field type="text" id="firstName" name="firstName" />
+                                    <ErrorMessage
                                         name="firstName"
-                                        className="p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        component="div"
+                                        className={styles.errorMessage}
                                     />
-                                    <ErrorMessage name="firstName" component="div" className="text-red-500 text-sm" />
                                 </div>
-
-                                <div className="flex flex-col">
-                                    <label htmlFor="lastName" className="mb-2 font-medium">Last Name</label>
-                                    <Field
-                                        type="text"
-                                        id="lastName"
+                                <div className={styles.formGroup}>
+                                    <label htmlFor="lastName">Last Name</label>
+                                    <Field type="text" id="lastName" name="lastName" />
+                                    <ErrorMessage
                                         name="lastName"
-                                        className="p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        component="div"
+                                        className={styles.errorMessage}
                                     />
-                                    <ErrorMessage name="lastName" component="div" className="text-red-500 text-sm" />
                                 </div>
-
-                                <div className="flex flex-col">
-                                    <label htmlFor="email" className="mb-2 font-medium">Email</label>
-                                    <Field
-                                        type="email"
-                                        id="email"
+                                <div className={styles.formGroup}>
+                                    <label htmlFor="email">Email</label>
+                                    <Field type="email" id="email" name="email" />
+                                    <ErrorMessage
                                         name="email"
-                                        className="p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        component="div"
+                                        className={styles.errorMessage}
                                     />
-                                    <ErrorMessage name="email" component="div" className="text-red-500 text-sm" />
                                 </div>
-
-                                <div className="flex flex-col">
-                                    <label htmlFor="mobile" className="mb-2 font-medium">Mobile Number</label>
-                                    <Field
-                                        type="text"
-                                        id="mobile"
+                                <div className={styles.formGroup}>
+                                    <label htmlFor="mobile">Mobile Number</label>
+                                    <Field type="text" id="mobile" name="mobile" />
+                                    <ErrorMessage
                                         name="mobile"
-                                        className="p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        component="div"
+                                        className={styles.errorMessage}
                                     />
-                                    <ErrorMessage name="mobile" component="div" className="text-red-500 text-sm" />
                                 </div>
-
-                                <div className="flex flex-col">
-                                    <label htmlFor="password" className="mb-2 font-medium">Password</label>
-                                    <Field
-                                        type="password"
-                                        id="password"
+                                <div className={styles.formGroup}>
+                                    <label htmlFor="password">Password</label>
+                                    <Field type="password" id="password" name="password" />
+                                    <ErrorMessage
                                         name="password"
-                                        className="p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        component="div"
+                                        className={styles.errorMessage}
                                     />
-                                    <ErrorMessage name="password" component="div" className="text-red-500 text-sm" />
                                 </div>
-
-                                <div className="flex flex-col">
-                                    <label htmlFor="confirmPassword" className="mb-2 font-medium">Confirm Password</label>
+                                <div className={styles.formGroup}>
+                                    <label htmlFor="confirmPassword">Confirm Password</label>
                                     <Field
                                         type="password"
                                         id="confirmPassword"
                                         name="confirmPassword"
-                                        className="p-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
-                                    <ErrorMessage name="confirmPassword" component="div" className="text-red-500 text-sm" />
+                                    <ErrorMessage
+                                        name="confirmPassword"
+                                        component="div"
+                                        className={styles.errorMessage}
+                                    />
                                 </div>
-
-                                <button
-                                    type="submit"
-                                    className="w-full py-2 mt-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                >
+                                <button type="submit" className={styles.submitButton}>
                                     Sign Up
                                 </button>
                             </Form>
                         )}
                     </Formik>
                     <div
-                        className="flex justify-center mt-6 cursor-pointer underline text-blue-700 hover:text-blue-500"
-                        onClick={() => navigate("/login")}
+                        className={styles.loginLink}
+                        onClick={() => navigate('/login')}
                     >
                         Log in
                     </div>
                 </div>
             </div>
+
 
         </>
     )

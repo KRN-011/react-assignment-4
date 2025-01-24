@@ -7,6 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import ProductImageModal from '../Components/ProductImageModal';
 import { IoIosCloseCircle } from "react-icons/io";
 import Loader from '../utils/Loader';
+import styles from '../styles/productDetail.module.scss'
 
 interface Product {
     id: number;
@@ -111,58 +112,57 @@ const ProductDetail: React.FC = () => {
 
     return (
         <>
-            <div className="container mx-auto p-6 mt-10">
+            <div className={styles.container}>
                 {/* Product Hero Section */}
-                <div className="flex flex-col lg:flex-row items-start">
-                    <div className="lg:w-1/2 w-full mb-6 lg:mb-0 flex justify-center items-center">
+                <div className={styles.productHero}>
+                    <div className={styles.imageWrapper}>
                         <img
                             src={product.thumbnail}
                             alt={product.title}
-                            className="w-3/4 sm:w-1/2 h-auto rounded-lg border border-zinc-100 hover:border-zinc-300 duration-100"
                         />
                     </div>
-                    <div className="lg:w-1/2 w-full">
-                        <h1 className="text-2xl md:text-3xl font-semibold text-gray-900">
+                    <div className={styles.details}>
+                        <h1>
                             {product.title}
                         </h1>
-                        <p className="text-xs text-gray-700 bg-zinc-300 w-fit px-2 rounded-2xl mt-2">
+                        <p className={styles.category}>
                             {product.category}
                         </p>
-                        <p className="mt-4">{product.description}</p>
-                        <div className="mt-6">
-                            <span className="text-lg md:text-xl font-semibold text-green-600">
+                        <p className={styles.description}>{product.description}</p>
+                        <div className={styles.pricing}>
+                            <span className={styles.currentPrice}>
                                 ${product.price}
                             </span>
-                            <span className="ml-4 text-sm line-through text-gray-500">
+                            <span className={styles.originalPrice}>
                                 $
                                 {(
                                     product.price *
                                     (100 / (100 - product.discountPercentage))
                                 ).toFixed(2)}
                             </span>
-                            <span className="ml-2 text-sm bg-red-600 text-white w-fit px-2 rounded-2xl">
+                            <span className={styles.discountBadge}>
                                 {product.discountPercentage}% OFF
                             </span>
                         </div>
-                        <p className="mt-4 text-gray-600 flex gap-3 items-center">
+                        <p className={styles.infoRow}>
                             <FaHandPointRight size="1.3em" />
                             Brand: {product.brand}
                         </p>
-                        <p className="mt-2 text-gray-600 flex gap-3 items-center">
+                        <p className={styles.infoRow}>
                             <FaHandPointRight size="1.3em" />
                             SKU: {product.sku}
                         </p>
-                        <p className="mt-2 text-gray-600 flex gap-3 items-center">
+                        <p className={styles.infoRow}>
                             <FaHandPointRight size="1.3em" />
                             Availability: {product.availabilityStatus}
                         </p>
                         {/* Rating */}
-                        <div className="mt-4 flex items-center">
-                            <span className="text-yellow-400">
+                        <div className={styles.rating}>
+                            <span className={styles.stars}>
                                 {"★".repeat(Math.floor(product.rating))}
                                 {"☆".repeat(5 - Math.floor(product.rating))}
                             </span>
-                            <span className="ml-2 text-gray-500">
+                            <span className={styles.ratingValue}>
                                 ({product.rating?.toFixed(1)})
                             </span>
                         </div>
@@ -170,12 +170,12 @@ const ProductDetail: React.FC = () => {
                 </div>
 
                 {/* Product Images */}
-                <div className="mt-10">
-                    <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">
+                <div className={styles.productImages}>
+                    <h2>
                         Product Images
                     </h2>
                     {!isImageLoaded && (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-4">
+                        <div className={styles.imageGrid}>
                             {product.images.map((_, index) => (
                                 <div
                                     key={index}
@@ -188,7 +188,7 @@ const ProductDetail: React.FC = () => {
                     )}
                     <div
                         onLoad={imageLoader}
-                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-4"
+                        className={styles.imageGrid}
                     >
                         {product.images.map((img, index) => (
                             <img
@@ -196,49 +196,48 @@ const ProductDetail: React.FC = () => {
                                 src={img}
                                 alt={`product-image-${index}`}
                                 onClick={(e) => imageModalOpenOnClick(e)}
-                                className={`w-full h-full object-contain rounded-lg border border-zinc-100 hover:shadow-md transform duration-200 p-2 hover:cursor-pointer ${isImageLoaded ? "block" : "hidden"
-                                    }`}
+                                className={`${isImageLoaded ? "block" : "hidden"}`}
                             />
                         ))}
                     </div>
                 </div>
 
                 {/* Product Details Section */}
-                <div>
-                    <h2 className="mt-10 text-xl md:text-2xl font-semibold text-gray-900">
+                <div className={styles.productDetails}>
+                    <h2>
                         Product Details
                     </h2>
-                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                        <div>
-                            <h3 className="text-lg md:text-xl font-semibold text-gray-900">
+                    <div className={styles.detailsGrid}>
+                        <div className={styles.detailCard}>
+                            <h3>
                                 Dimensions
                             </h3>
-                            <p className="mt-2 text-gray-600">
+                            <p>
                                 Width: {product.dimensions?.width} cm
                             </p>
-                            <p className="mt-1 text-gray-600">
+                            <p>
                                 Height: {product.dimensions?.height} cm
                             </p>
-                            <p className="mt-1 text-gray-600">
+                            <p>
                                 Depth: {product.dimensions?.depth} cm
                             </p>
                         </div>
-                        <div>
-                            <h3 className="text-lg md:text-xl font-semibold text-gray-900">
+                        <div className={styles.detailCard}>
+                            <h3>
                                 Shipping & Warranty
                             </h3>
-                            <p className="mt-2 text-gray-600">
+                            <p>
                                 Shipping Info: {product.shippingInformation}
                             </p>
-                            <p className="mt-1 text-gray-600">
+                            <p>
                                 Warranty: {product.warrantyInformation}
                             </p>
                         </div>
-                        <div>
-                            <h3 className="text-lg md:text-xl font-semibold text-gray-900">
+                        <div className={styles.detailCard}>
+                            <h3>
                                 Return Policy
                             </h3>
-                            <p className="mt-2 text-gray-600">
+                            <p>
                                 Return Policy: {product.returnPolicy}
                             </p>
                         </div>
@@ -246,25 +245,25 @@ const ProductDetail: React.FC = () => {
                 </div>
 
                 {/* Reviews Section */}
-                <div className="mt-10 w-full sm:w-3/4 lg:w-2/3">
-                    <h2 className="text-xl md:text-2xl font-semibold text-gray-900">
+                <div className={styles.reviews}>
+                    <h2>
                         Customer Reviews
                     </h2>
-                    <div className="mt-4 space-y-6">
+                    <div>
                         {product.reviews?.map((review, index) => (
                             <div
                                 key={index}
-                                className="p-4 border border-gray-300 rounded-lg"
+                                className={styles.reviewCard}
                             >
-                                <div className="flex items-center justify-between">
-                                    <span className="font-semibold">{review.reviewerName}</span>
-                                    <span className="text-yellow-400">
+                                <div className={styles.reviewHeader}>
+                                    <span className={styles.reviewerName}>{review.reviewerName}</span>
+                                    <span className={styles.stars}>
                                         {"★".repeat(Math.floor(review.rating))}
                                         {"☆".repeat(5 - Math.floor(review.rating))}
                                     </span>
                                 </div>
-                                <p className="mt-2 text-gray-600">{review.comment}</p>
-                                <p className="mt-2 text-sm text-gray-500">
+                                <p className={styles.comment}>{review.comment}</p>
+                                <p className={styles.reviewDate}>
                                     Reviewed on: {new Date(review.date).toLocaleDateString()}
                                 </p>
                             </div>

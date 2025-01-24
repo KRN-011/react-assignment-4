@@ -1,0 +1,58 @@
+.container {
+    width: 100vw;
+    z-index: 0;
+    background-color: #1e40af; /* blue-600 */
+    color: #d1d5db; /* zinc-100 */
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.25rem; /* px-5 */
+    @media (min-width: 768px) {
+      padding: 0 2.5rem; /* md:px-10 */
+    }
+  }
+  
+  .logo {
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: bold;
+    @media (min-width: 768px) {
+      font-size: 1.875rem; /* md:text-3xl */
+    }
+  }
+  
+  .navMenu {
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+  
+  .navLinks {
+    display: flex;
+    gap: 1.25rem; /* gap-5 */
+    @media (min-width: 768px) {
+      gap: 2.5rem; /* md:gap-10 */
+    }
+    font-weight: 600;
+  }
+  
+  .navLink {
+    border-bottom: 2px solid transparent;
+    transition: border 0.1s ease;
+    &:hover {
+      border-color: white;
+    }
+  }
+  
+  .active {
+    border-bottom-color: #1e40af; /* blue-600 */
+  }
+  
+  .logout {
+    border-bottom: 2px solid transparent;
+    transition: border 0.1s ease;
+    &:hover {
+      border-color: white;
+    }
+  }
+  

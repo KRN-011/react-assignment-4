@@ -1,0 +1,144 @@
+// Container
+.productListingContainer {
+    max-width: 80rem; // max-w-7xl
+    margin: 0 auto; // mx-auto
+    padding: 1.5rem; // p-6
+  }
+  
+  // Grid Container
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 1fr; // grid-cols-1
+  
+    @media (min-width: 640px) {
+      // sm:grid-cols-2
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    @media (min-width: 768px) {
+      // md:grid-cols-3
+      grid-template-columns: repeat(3, 1fr);
+    }
+  
+    @media (min-width: 1024px) {
+      // lg:grid-cols-4
+      grid-template-columns: repeat(4, 1fr);
+    }
+  
+    gap: 1.5rem; // gap-6
+  }
+  
+  // Product Card
+  .productCard {
+    cursor: pointer;
+    border: 1px solid #d1d5db; // border
+    border-radius: 0.5rem; // rounded-lg
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // shadow-md
+    padding: 1rem; // p-4
+    background-color: #ffffff; // bg-white
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease-in-out;
+  
+    &:hover {
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15); // hover:shadow-lg
+    }
+  
+    img {
+      width: 100%; // w-full
+      height: 12rem; // h-48
+      object-fit: contain; // object-contain
+      border-radius: 0.375rem; // rounded-md
+      margin-bottom: 1rem; // mb-4
+    }
+  }
+  
+  // Product Info
+  .productInfo {
+    h3 {
+      font-size: 1.125rem; // text-lg
+      font-weight: 600; // font-semibold
+      color: #1f2937; // text-gray-800
+    }
+  
+    .category {
+      font-size: 0.75rem; // text-xs
+      color: #374151; // text-gray-700
+      background-color: #d1d5db; // bg-zinc-300
+      padding: 0 0.5rem; // px-2
+      border-radius: 1rem; // rounded-2xl
+      margin: 0.5rem 0; // my-2
+      display: inline-block;
+    }
+  
+    .detailRow {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem; // gap-2
+      font-size: 0.875rem; // text-sm
+      color: #374151; // text-gray-700
+      font-weight: 700; // font-bold
+  
+      &.brandIcon {
+        svg {
+          color: #3b82f6; // Custom brand icon color
+        }
+      }
+  
+      &.price {
+        svg {
+          color: #16a34a; // BiSolidDollarCircle color
+        }
+      }
+  
+      &.rating {
+        svg {
+          color: #facc15; // TiStarFullOutline color
+        }
+      }
+  
+      &.discount {
+        svg {
+          color: #0ea5e9; // IoMdPricetag color
+        }
+      }
+    }
+  }
+  
+  // Pagination
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem; // mt-6
+    gap: 5px;
+  
+    .paginationItem {
+      padding: 0.5rem 1rem; // px-4 py-2
+      border: 1px solid #d1d5db; // border
+      border-radius: 0.375rem; // rounded-md
+      color: #374151; // text-gray-700
+      transition: background-color 0.3s ease-in-out;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #bfdbfe; // hover:bg-blue-100
+      }
+  
+      &.active {
+        background-color: #3b82f6; // bg-blue-500
+        color: #ffffff; // text-white
+      }
+  
+      &.disabled {
+        color: #9ca3af; // text-gray-400
+        cursor: not-allowed;
+      }
+    }
+  
+    .paginationBreak {
+      padding: 0.5rem 1rem; // px-4 py-2
+      color: #374151; // text-gray-700
+    }
+  }
+  

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { logInValidationSchema } from '../utils/logInValidationSchema';
 import CryptoJS from 'crypto-js';
 import { useNavigate } from 'react-router-dom';
+import styles from '../styles/login.module.scss'
 
 interface logInFormValues {
     email: string;
@@ -30,16 +31,16 @@ const Login: React.FC = () => {
         const users: User[] = JSON.parse(localStorage.getItem("users") || "[]");
 
         // check if email is registered
-        const user = users.find((user) => user.email === values.email )
+        const user = users.find((user) => user.email === values.email)
 
-        if( !user ) {
+        if (!user) {
             setErrorMessage("Email not Registered!")
             return;
         }
 
         //  hash the password entered by user and compare it with the stored hashed password
         const hashedInputPassword = CryptoJS.SHA256(values.password).toString();
-        if( hashedInputPassword !== user.password ) {
+        if (hashedInputPassword !== user.password) {
             setErrorMessage("Incorrect Credentials!")
             return;
         }
@@ -52,55 +53,67 @@ const Login: React.FC = () => {
         // redirect after login successfully
         navigate("/")
     }
-    
+
 
     return (
         <>
-            <div className="max-w-md mx-auto mt-12 p-6 bg-white rounded-lg shadow-lg">
-                <h2 className="text-3xl font-semibold text-center mb-6">Login</h2>
-
-                <Formik
-                    initialValues={{ email: "", password: "" }}
-                    validationSchema={logInValidationSchema}
-                    onSubmit={handleSubmit}
-                >
-                    {() => (
-                        <Form className="space-y-6">
-                            <div className="flex flex-col">
-                                <label htmlFor="email" className="mb-2 font-medium">Email</label>
-                                <Field
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
-                            </div>
-
-                            <div className="flex flex-col">
-                                <label htmlFor="password" className="mb-2 font-medium">Password</label>
-                                <Field
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
-                            </div>
-
-                            {errorMessage && <div className="text-red-500 text-sm mt-2">{errorMessage}</div>}
-
-                            <button
-                                type="submit"
-                                className="w-full py-2 mt-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            >
-                                Login
-                            </button>
-                        </Form>
-                    )}
-                </Formik>
-                <div className='flex justify-center mt-6 cursor-pointer underline text-blue-700 hover:text-blue-500' onClick={() => {window.location.href = "/signup"}}>
-                    Sign up
+            <div className={styles.loginContainer}>
+                <div className={styles.formContainer}>
+                    <h2>Login</h2>
+                    <Formik
+                        initialValues={{ email: "", password: "" }}
+                        validationSchema={logInValidationSchema}
+                        onSubmit={handleSubmit}
+                    >
+                        {() => (
+                            <Form className={styles.form}>
+                                <div className={styles.formGroup}>
+                                    <label htmlFor="email">Email</label>
+                                    <Field
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        className={styles.input}
+                                    />
+                                    <ErrorMessage
+                                        name="email"
+                                        component="div"
+                                        className={styles.errorMessage}
+                                    />
+                                </div>
+                                <div className={styles.formGroup}>
+                                    <label htmlFor="password">Password</label>
+                                    <Field
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        className={styles.input}
+                                    />
+                                    <ErrorMessage
+                                        name="password"
+                                        component="div"
+                                        className={styles.errorMessage}
+                                    />
+                                </div>
+                                {errorMessage && (
+                                    <div className={styles.errorGlobal}>
+                                        {errorMessage}
+                                    </div>
+                                )}
+                                <button type="submit" className={styles.submitButton}>
+                                    Login
+                                </button>
+                            </Form>
+                        )}
+                    </Formik>
+                    <div
+                        className={styles.signupLink}
+                        onClick={() => {
+                            window.location.href = "/signup";
+                        }}
+                    >
+                        Sign up
+                    </div>
                 </div>
             </div>
 

@@ -1,0 +1,25 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px) brightness(75%);
+  }
+  
+  .modalContent {
+    width: 30vw;
+    background-color: #fff;
+    border: 1px solid #e4e4e7; /* zinc-200 */
+    border-radius: 1.25rem; /* rounded-2xl */
+  }
+  
+  .modalImage {
+    width: 100%;
+    height: auto;
+    border-radius: 1.25rem; /* rounded-2xl */
+  }
+  

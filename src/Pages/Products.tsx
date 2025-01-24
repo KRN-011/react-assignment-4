@@ -7,6 +7,8 @@ import { IoMdPricetag } from "react-icons/io";
 import { BiSolidDollarCircle } from "react-icons/bi";
 import Loader from "../utils/Loader";
 
+import styles from '../styles/products.module.scss'
+
 interface Product {
   id: number;
   title: string;
@@ -57,43 +59,39 @@ const Products = () => {
   return (
     <>
       {
-        isLoading ? <Loader/> :
-          <div className="max-w-7xl mx-auto p-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-6">
+        isLoading ? <Loader /> :
+          <div className={styles.productListingContainer}>
+            <div className={styles.gridContainer}>
               {products.map((product) => (
-                <div onClick={() => handleProductDetail(product.id)}
-                  className="cursor-pointer border rounded-lg shadow-md p-4 bg-white hover:shadow-lg transition-shadow flex flex-col justify-between"
+                <div
+                  onClick={() => handleProductDetail(product.id)}
+                  className={styles.productCard}
                   key={product.id}
                 >
                   <img
                     src={product.thumbnail}
                     alt={product.title}
-                    className="w-full h-48 object-contain rounded-md mb-4"
                   />
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">
-                      {product.title}
-                    </h3>
-                    <p className="text-xs text-gray-700 bg-zinc-300 w-fit px-2 rounded-2xl my-2">
-                      {product.category}
-                    </p>
-                    <p className="text-sm text-gray-700 flex items-center gap-2 font-bold">
+                  <div className={styles.productInfo}>
+                    <h3>{product.title}</h3>
+                    <p className={styles.category}>{product.category}</p>
+                    <p className={`${styles.detailRow} ${styles.brandIcon}`}>
                       <TbBrandAppgallery size={"1.5em"} /> {product.brand}
                     </p>
-                    <p className="text-sm text-gray-700 flex items-center gap-2 font-bold">
-                      <TiStarFullOutline color="#facc15" size={"1.5em"} /> {product.rating}
+                    <p className={`${styles.detailRow} ${styles.rating}`}>
+                      <TiStarFullOutline size={"1.5em"} /> {product.rating}
                     </p>
-                    <p className="text-sm text-gray-700 flex items-center gap-2 font-bold">
-                      <BiSolidDollarCircle color="#16a34a" size={"1.5em"} />{product.price} /-
+                    <p className={`${styles.detailRow} ${styles.price}`}>
+                      <BiSolidDollarCircle size={"1.5em"} /> {product.price} /-
                     </p>
-                    <p className="text-sm text-gray-700 flex items-center gap-2 font-bold">
-                      <IoMdPricetag color="#0ea5e9" size={"1.5em"} />{product.discountPercentage}% off
+                    <p className={`${styles.detailRow} ${styles.discount}`}>
+                      <IoMdPricetag size={"1.5em"} /> {product.discountPercentage}% off
                     </p>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="flex justify-center mt-6">
+            <div className={styles.pagination}>
               <ReactPaginate
                 breakLabel="..."
                 nextLabel="next"
@@ -101,17 +99,18 @@ const Products = () => {
                 pageRangeDisplayed={3}
                 pageCount={Math.ceil(totalProducts / limit)}
                 previousLabel="previous"
-                containerClassName="flex items-center space-x-2"
-                pageClassName="px-4 py-2 border rounded-md text-gray-700 hover:bg-blue-100"
-                activeClassName="bg-blue-500 text-white"
-                previousClassName="px-4 py-2 border rounded-md text-gray-700 hover:bg-blue-100"
-                nextClassName="px-4 py-2 border rounded-md text-gray-700 hover:bg-blue-100"
-                disabledClassName="text-gray-400 cursor-not-allowed"
-                breakClassName="px-4 py-2 text-gray-700"
+                containerClassName={styles.pagination}
+                pageClassName={styles.paginationItem}
+                activeClassName={`${styles.paginationItem} ${styles.active}`}
+                previousClassName={styles.paginationItem}
+                nextClassName={styles.paginationItem}
+                disabledClassName={styles.disabled}
+                breakClassName={styles.paginationBreak}
                 forcePage={Math.ceil(skip / limit)}
               />
             </div>
           </div>
+
       }
     </>
   );

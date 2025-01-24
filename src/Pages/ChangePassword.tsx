@@ -2,6 +2,7 @@ import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { changePasswordValidationScheam } from '../utils/changePasswordValidationSchema'
 import { useNavigate } from 'react-router-dom';
+import styles from '../styles/changePassword.module.scss'
 
 interface User {
     firstName: string;
@@ -71,90 +72,80 @@ const ChangePassword: React.FC = () => {
 
     return (
         <>
-            <div className="max-w-md mx-auto mt-12 p-6 bg-white rounded-lg shadow-md">
-                <h2 className="text-3xl font-bold text-center mb-6">Change Password</h2>
+            <div className={styles.changePasswordContainer}>
+    <h2>Change Password</h2>
+    <Formik
+        initialValues={{
+            currentPassword: "",
+            newPassword: "",
+            confirmNewPassword: "",
+        }}
+        validationSchema={changePasswordValidationScheam}
+        onSubmit={handleSubmit}
+    >
+        {() => (
+            <Form className={styles.form}>
+                {/* Current Password */}
+                <div className={styles.formGroup}>
+                    <label htmlFor="currentPassword">Current Password</label>
+                    <Field
+                        type="password"
+                        id="currentPassword"
+                        name="currentPassword"
+                    />
+                    <ErrorMessage
+                        name="currentPassword"
+                        component="div"
+                        className={styles.errorMessage}
+                    />
+                </div>
 
-                <Formik
-                    initialValues={{
-                        currentPassword: "",
-                        newPassword: "",
-                        confirmNewPassword: "",
-                    }}
-                    validationSchema={changePasswordValidationScheam}
-                    onSubmit={handleSubmit}
-                >
-                    {() => (
-                        <Form className="space-y-6">
-                            {/* Current Password */}
-                            <div className="flex flex-col">
-                                <label htmlFor="currentPassword" className="mb-2 font-medium">
-                                    Current Password
-                                </label>
-                                <Field
-                                    type="password"
-                                    id="currentPassword"
-                                    name="currentPassword"
-                                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                <ErrorMessage
-                                    name="currentPassword"
-                                    component="div"
-                                    className="text-red-500 text-sm mt-1"
-                                />
-                            </div>
+                {/* New Password */}
+                <div className={styles.formGroup}>
+                    <label htmlFor="newPassword">New Password</label>
+                    <Field
+                        type="password"
+                        id="newPassword"
+                        name="newPassword"
+                    />
+                    <ErrorMessage
+                        name="newPassword"
+                        component="div"
+                        className={styles.errorMessage}
+                    />
+                </div>
 
-                            {/* New Password */}
-                            <div className="flex flex-col">
-                                <label htmlFor="newPassword" className="mb-2 font-medium">
-                                    New Password
-                                </label>
-                                <Field
-                                    type="password"
-                                    id="newPassword"
-                                    name="newPassword"
-                                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                <ErrorMessage
-                                    name="newPassword"
-                                    component="div"
-                                    className="text-red-500 text-sm mt-1"
-                                />
-                            </div>
+                {/* Confirm New Password */}
+                <div className={styles.formGroup}>
+                    <label htmlFor="confirmNewPassword">Confirm New Password</label>
+                    <Field
+                        type="password"
+                        id="confirmNewPassword"
+                        name="confirmNewPassword"
+                    />
+                    <ErrorMessage
+                        name="confirmNewPassword"
+                        component="div"
+                        className={styles.errorMessage}
+                    />
+                </div>
 
-                            {/* Confirm New Password */}
-                            <div className="flex flex-col">
-                                <label htmlFor="confirmNewPassword" className="mb-2 font-medium">
-                                    Confirm New Password
-                                </label>
-                                <Field
-                                    type="password"
-                                    id="confirmNewPassword"
-                                    name="confirmNewPassword"
-                                    className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                />
-                                <ErrorMessage
-                                    name="confirmNewPassword"
-                                    component="div"
-                                    className="text-red-500 text-sm mt-1"
-                                />
-                            </div>
+                {/* Error Message */}
+                {errorMessage && (
+                    <div className={styles.errorMessageGlobal}>
+                        {errorMessage}
+                    </div>
+                )}
 
-                            {/* Error Message */}
-                            {errorMessage && (
-                                <div className="text-red-500 text-sm mt-2">{errorMessage}</div>
-                            )}
+                {/* Submit Button */}
+                <button type="submit" className={styles.submitButton}>
+                    Change Password
+                </button>
+            </Form>
+        )}
+    </Formik>
+</div>
 
-                            {/* Submit Button */}
-                            <button
-                                type="submit"
-                                className="w-full py-2 mt-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            >
-                                Change Password
-                            </button>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
 
         </>
     )
