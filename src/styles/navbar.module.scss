@@ -30,10 +30,10 @@
   .navLinks {
     display: flex;
     gap: 1.25rem; /* gap-5 */
+    font-weight: 600;
     @media (min-width: 768px) {
       gap: 2.5rem; /* md:gap-10 */
     }
-    font-weight: 600;
   }
   
   .navLink {

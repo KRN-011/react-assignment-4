@@ -7,15 +7,6 @@
     .formContainer {
       width: 100%;
       max-width: 30vw; // xl:w-[30vw]
-      @media (max-width: 1280px) {
-        max-width: 40vw; // lg:w-[40vw]
-      }
-      @media (max-width: 1024px) {
-        max-width: 60vw; // md:w-[60vw]
-      }
-      @media (max-width: 640px) {
-        max-width: 80vw; // sm:w-[80vw]
-      }
   
       display: flex;
       flex-direction: column;
@@ -101,6 +92,16 @@
         &:hover {
           color: #1e40af; // hover:text-blue-500
         }
+      }
+
+      @media (max-width: 1280px) {
+        max-width: 40vw; // lg:w-[40vw]
+      }
+      @media (max-width: 1024px) {
+        max-width: 60vw; // md:w-[60vw]
+      }
+      @media (max-width: 640px) {
+        max-width: 80vw; // sm:w-[80vw]
       }
     }
   }
